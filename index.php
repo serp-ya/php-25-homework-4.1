@@ -1,4 +1,7 @@
 <?php
+$configJson = file_get_contents('./config.json');
+$config = json_decode($configJson, true);
+
 $filters = [
   'ISBN' => '',
   'name' => '',
@@ -32,7 +35,7 @@ if (count($filters)) {
   }
 }
 
-$connect = mysqli_connect('localhost', 'skundryukov', 'neto1777', 'global');
+$connect = mysqli_connect($config['server'], $config['username'], $config['password'], $config['dbName']);
 $setCharsetStatus = mysqli_set_charset($connect, 'utf8');
 
 if ($connect === false) {
