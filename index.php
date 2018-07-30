@@ -32,11 +32,15 @@ if (count($filters)) {
   }
 }
 
-$connect = mysqli_connect('localhost', 'root', '', '4-1-hw');
+$connect = mysqli_connect('localhost', 'skundryukov', 'neto1777', 'global');
+$setCharsetStatus = mysqli_set_charset($connect, 'utf8');
 
 if ($connect === false) {
   http_response_code(500);
   exit('MySQL connect error');
+} else if ($setCharsetStatus === false) {
+  http_response_code(500);
+  exit('MySQL change charset error');
 }
 
 $res = mysqli_query($connect, $sql);
